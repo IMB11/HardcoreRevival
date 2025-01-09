@@ -30,6 +30,8 @@ public class HardcoreRevivalManager {
     public static final ResourceKey<DamageType> NOT_RESCUED_IN_TIME = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(HardcoreRevival.MOD_ID, "not_rescued_in_time"));
     public static final ResourceKey<DamageType> EXECUTED = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(HardcoreRevival.MOD_ID, "executed"));
 
+    private boolean suppressDeathMessage = false;
+
     public HardcoreRevivalData getRevivalData(Player player) {
         HardcoreRevivalData provider = Balm.getProviders().getProvider(player, HardcoreRevivalData.class);
         return provider != null ? provider : InvalidHardcoreRevivalData.INSTANCE;
@@ -51,7 +53,7 @@ public class HardcoreRevivalManager {
         Balm.getEvents().fireEvent(new PlayerKnockedOutEvent(player, source));
 
         // If enabled, show a death message
-        if (player.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES)) {
+        if (!suppressDeathMessage && player.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES)) {
             MinecraftServer server = player.getServer();
             if (server != null) {
                 Team team = player.getTeam();
@@ -66,6 +68,8 @@ public class HardcoreRevivalManager {
                 }
             }
         }
+
+        suppressDeathMessage = false;
 
         updateKnockoutEffects(player);
     }
@@ -197,6 +201,7 @@ public class HardcoreRevivalManager {
     }
 
     public void execute(Player player) {
+        suppressDeathMessage = true;
         reset(player);
         final var damageTypes = player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE);
         final var damageSource = new DamageSource(damageTypes.getHolderOrThrow(EXECUTED));
