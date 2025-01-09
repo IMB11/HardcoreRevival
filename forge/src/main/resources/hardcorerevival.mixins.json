@@ -9,6 +9,7 @@
     "PlayerMixin",
     "ServerPlayNetHandlerMixin",
     "ServerPlayerAccessor",
+    "ServerPlayerMixin",
     "LivingEntityMixin",
     "LivingEntityAccessor"
   ],

@@ -13,6 +13,10 @@ public class HardcoreRevivalConfigData implements BalmConfigData {
     @Synced
     public int ticksUntilDeath = 20 * 60 * 2;
 
+    @Comment("The time in ticks until a knocked out player can be executed. 20 ticks are one second.")
+    @Synced
+    public int ticksUntilExecutable = 20 * 5;
+
     @Comment("If true, the timer until death continues even if the player logs out.")
     public boolean continueTimerWhileOffline = false;
 
