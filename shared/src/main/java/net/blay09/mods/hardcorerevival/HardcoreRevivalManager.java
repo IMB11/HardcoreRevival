@@ -30,7 +30,7 @@ public class HardcoreRevivalManager {
     public static final ResourceKey<DamageType> NOT_RESCUED_IN_TIME = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(HardcoreRevival.MOD_ID, "not_rescued_in_time"));
     public static final ResourceKey<DamageType> EXECUTED = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(HardcoreRevival.MOD_ID, "executed"));
 
-    private boolean suppressDeathMessage = false;
+    private static boolean suppressDeathMessage = false;
 
     public HardcoreRevivalData getRevivalData(Player player) {
         HardcoreRevivalData provider = Balm.getProviders().getProvider(player, HardcoreRevivalData.class);
