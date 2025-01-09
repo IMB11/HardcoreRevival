@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class HardcoreRevivalManager {
     public static final ResourceKey<DamageType> NOT_RESCUED_IN_TIME = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(HardcoreRevival.MOD_ID, "not_rescued_in_time"));
+    public static final ResourceKey<DamageType> EXECUTED = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(HardcoreRevival.MOD_ID, "executed"));
 
     public HardcoreRevivalData getRevivalData(Player player) {
         HardcoreRevivalData provider = Balm.getProviders().getProvider(player, HardcoreRevivalData.class);
@@ -197,7 +198,8 @@ public class HardcoreRevivalManager {
 
     public void execute(Player player) {
         reset(player);
-        // Apply any necessary effects or actions for execution
-        // TODO: need to have the "Executed" damage source.
+        final var damageTypes = player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE);
+        final var damageSource = new DamageSource(damageTypes.getHolderOrThrow(EXECUTED));
+        player.hurt(damageSource, Float.MAX_VALUE);
     }
 }
