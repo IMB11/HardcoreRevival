@@ -9,6 +9,7 @@
   "gui.hardcorerevival.rescuing": "Rescuing %s",
   "death.attack.not_rescued_in_time": "%1$s was not rescued in time",
   "death.attack.not_rescued_in_time.player": "%1$s was not rescued in time",
+  "death.attack.executed": "%1$s executed %2$s",
   "config.hardcorerevival.ticksUntilDeath": "Ticks until Death",
   "config.hardcorerevival.ticksUntilDeath.tooltip": "The time in ticks in which a player can still be rescued from death. 20 ticks are one second. Set to 0 to disable the timer.",
   "config.hardcorerevival.continueTimerWhileOffline": "Continue Timer while Offline",
